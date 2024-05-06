@@ -133,12 +133,21 @@ function App() {
 const MainPage = () => {
     const navigate = useNavigate();
 
-}
+    return(
+        
+    <div>
+        <nav>
+            <Link to="/">Home </Link>
+            <Link to="/register">Register </Link>
+            <Link to="/login">Login </Link>
+        </nav>
+        <h1>RateMyApartment</h1>
+    </div>)}
 
     return (
     <Router>
         <Routes>
-            <Route path="/mainPage" element={<MainPage />} />
+            <Route path ="/" element={<MainPage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
         </Routes>
