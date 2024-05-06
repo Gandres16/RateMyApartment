@@ -1,13 +1,12 @@
-// Author: Jacob Frencher
-// ISU Netid : jacoblf@iastate.edu
-// Date :  April 27, 2024
-
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import './styles.css';
 
 function App() {
 
-    const Signup = () => {
+    const Register = () => {
         // define hooks
         const navigate = useNavigate();
         const [formData, setFormData] = useState({
@@ -29,7 +28,7 @@ function App() {
             e.preventDefault();
             console.log(e.target.value);
 
-            fetch("http://127.0.0.1:4000/signup", {
+            fetch("http://127.0.0.1:4000/register", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData),
@@ -47,6 +46,7 @@ function App() {
             .then(data => {
                 console.log(data);
                 alert("User added successfully!");
+                navigate("/"); // Redirect to home page after successful registration
             })
 
             .catch(error => {
@@ -58,11 +58,12 @@ function App() {
         // return
         return (<div>
             {/* Form to input data */}
-            <form onSubmit={handleSubmit}>
-                <h1>Signup</h1>
-                <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required /> <br />
-                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required /> <br />
-                <button type="submit">Submit</button>
+            <form onSubmit={handleSubmit} className="login-form">
+                <h1>Register</h1>
+                <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
+                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input"/> <br />
+                <Link to="/login" className="register-link">Login</Link> <br />
+                <button type="submit" className="login-button">Register</button>
             </form>
         </div>);
     }
@@ -107,6 +108,7 @@ function App() {
         .then(data => {
             console.log(data);
             alert("User logged in successfully!");
+            navigate("/"); // Redirect to home page after successful login
         })
 
         .catch(error => {
@@ -118,11 +120,12 @@ function App() {
     // return
     return (<div>
         {/* Form to input data */}
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="login-form">
             <h1>Login</h1>
-            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required /> <br />
-            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required /> <br />
-            <button type="submit">Submit</button>
+            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
+            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input" /> <br />
+            <Link to="/register" className="register-link">Register</Link> <br />
+            <button type="submit" className="login-button">Login</button>
         </form>
     </div>);
 }
@@ -130,7 +133,7 @@ function App() {
     return (
     <Router>
         <Routes>
-            <Route path="/signup" element={<Signup />} />
+            <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
         </Routes>
     </Router>
