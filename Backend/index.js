@@ -2,6 +2,13 @@ const express = require("express");
 const db = require("./db.js");
 const cors = require("cors");
 
+// for login 
+const jwt = require("jsonwebtoken");
+const bcrypt = require('bcryptjs');
+const mysql = require('mysql2/promise');
+
+const secretKey = process.env.JWT_SECRET_KEY;
+
 const app = express();
 
 const PORT = 4000;
@@ -15,7 +22,7 @@ app.listen(PORT, () => {
 console.log(`Server is running on ${PORT}`);
 });
 
-app.post("/signup", async (req, res) => {
+app.post("/register", async (req, res) => {
     try {
         // Validate if body contains data
         if (!req.body || Object.keys(req.body).length === 0) {
@@ -80,8 +87,7 @@ app.post("/login", async (req, res) => {
             return res.status(404).send({error:msg});
         }
 
-        const email = req.body.email;
-        const password = req.body.password;
+        const { email, password } = req.body;
 
         // Check if email is in database
         const [userExists] = await db.query("SELECT * FROM users WHERE email = ?", [email]);
@@ -101,10 +107,20 @@ app.post("/login", async (req, res) => {
             return res.status(409).send({error:msg});
         }
 
-        // success
-        const msg = "POST:User signed in successfully";
+        const user = userExists[0];
+
+        // Create a token
+        const token = jwt.sign({ email: user.email}, secretKey, { expiresIn: "1h" });
+
+        // Return token
+        const msg = "POST:User registered successfully";
         console.log(msg);
-        return res.status(200).send({success:msg});
+        return res.status(200).send({success: msg, token: token });
+
+        // success
+        // const msg = "POST:User signed in successfully";
+        // console.log(msg);
+        // return res.status(200).send({success:msg});
 
         // add logic for signing in user
 
