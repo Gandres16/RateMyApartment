@@ -137,9 +137,9 @@ const mainPage = () => {
     return (
     <Router>
         <Routes>
+            <Route path="/mainPage" element={<mainPage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/mainPage" element={<mainPage />} />
         </Routes>
     </Router>
     );
