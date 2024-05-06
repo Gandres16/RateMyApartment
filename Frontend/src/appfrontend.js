@@ -130,14 +130,15 @@ function App() {
     </div>);
 }
 
-const mainPage = () => {
+const MainPage = () => {
+    const navigate = useNavigate();
 
 }
 
     return (
     <Router>
         <Routes>
-            <Route path="/mainPage" element={<mainPage />} />
+            <Route path="/mainPage" element={<MainPage />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
         </Routes>
