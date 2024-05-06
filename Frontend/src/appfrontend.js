@@ -131,7 +131,7 @@ function App() {
 }
 
 const mainPage = () => {
-    
+
 }
 
     return (
@@ -139,6 +139,7 @@ const mainPage = () => {
         <Routes>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/mainPage" element={<mainPage />} />
         </Routes>
     </Router>
     );
