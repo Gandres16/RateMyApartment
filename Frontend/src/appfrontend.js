@@ -130,6 +130,10 @@ function App() {
     </div>);
 }
 
+const mainPage = () => {
+    
+}
+
     return (
     <Router>
         <Routes>
