@@ -58,12 +58,15 @@ function App() {
         // return
         return (<div>
             {/* Form to input data */}
-            <form onSubmit={handleSubmit} className="login-form">
+            <form onSubmit={handleSubmit} class="login-form">
                 <h1>Register</h1>
-                <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
-                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input"/> <br />
-                <Link to="/login" className="register-link">Login</Link> <br />
-                <button type="submit" className="login-button">Register</button>
+                <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required class="login-input" /> <br />
+                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required class="login-input"/> <br />
+                <div class="form-footer">
+                    <p class="form-paragraph">Already have an account?  </p>
+                    <Link to="/login" class="register-link">Login</Link> <br />
+                </div>
+                <button type="submit" class="login-button">Register</button>
             </form>
         </div>);
     }
@@ -120,12 +123,15 @@ function App() {
     // return
     return (<div>
         {/* Form to input data */}
-        <form onSubmit={handleSubmit} className="login-form">
+        <form onSubmit={handleSubmit} class="login-form">
             <h1>Login</h1>
-            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
-            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input" /> <br />
-            <Link to="/register" className="register-link">Register</Link> <br />
-            <button type="submit" className="login-button">Login</button>
+            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required class="login-input" /> <br />
+            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required class="login-input" /> <br />
+            <div class="form-footer">
+                <p class="form-paragraph">Don't have an account?  </p>
+                <Link to="/register" class="register-link">Register</Link> <br />
+            </div>
+            <button type="submit" class="login-button">Login</button>
         </form>
     </div>);
 }
