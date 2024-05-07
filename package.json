@@ -4,13 +4,9 @@
     "bootstrap": "^5.3.3",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-<<<<<<< HEAD
-    "mysql2": "^3.9.7",
-=======
     "jwt-decode": "^4.0.0",
     "mysql2": "^3.9.7",
     "react-auth-kit": "^3.1.3",
->>>>>>> 3e7580a16ae68e2a0fad5d1ea12bee835466fabe
     "react-bootstrap": "^2.10.2"
   }
 }
