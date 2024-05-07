@@ -1,9 +1,10 @@
-body {
+body, html{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f3f3f3;
+    padding-bottom: 20px;
   }
   
 .login-form {
@@ -51,4 +52,14 @@ body {
 .form-paragraph {
   margin-left: 10px;
   color: #888;
+}
+
+#navbar {
+  width:100%;
+  top: 0;
+}
+
+.nav-link{
+  margin: 0 10px;
+  flex-grow: 0;
 }
