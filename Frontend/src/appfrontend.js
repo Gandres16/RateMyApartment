@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 import './styles.css';
 
+const secretKey = process.env.JWT_SECRET_KEY;
+
 function App() {
+
+    var signedInUser = null;
 
     const Register = () => {
         // define hooks
@@ -46,6 +51,7 @@ function App() {
             .then(data => {
                 console.log(data);
                 alert("User added successfully!");
+                signedInUser = formData.email;
                 navigate("/"); // Redirect to home page after successful registration
             })
 
@@ -58,15 +64,15 @@ function App() {
         // return
         return (<div>
             {/* Form to input data */}
-            <form onSubmit={handleSubmit} class="login-form">
+            <form onSubmit={handleSubmit} className="login-form">
                 <h1>Register</h1>
-                <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required class="login-input" /> <br />
-                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required class="login-input"/> <br />
-                <div class="form-footer">
-                    <p class="form-paragraph">Already have an account?  </p>
-                    <Link to="/login" class="register-link">Login</Link> <br />
+                <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
+                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input"/> <br />
+                <div className="form-footer">
+                    <p className="form-paragraph">Already have an account?  </p>
+                    <Link to="/login" className="register-link">Login</Link> <br />
                 </div>
-                <button type="submit" class="login-button">Register</button>
+                <button type="submit" className="login-button">Register</button>
             </form>
         </div>);
     }
@@ -110,7 +116,8 @@ function App() {
 
         .then(data => {
             console.log(data);
-            alert("User logged in successfully!");
+            alert("User logged in successfully!:" + data.user);
+            signedInUser = data.user;
             navigate("/"); // Redirect to home page after successful login
         })
 
@@ -123,15 +130,15 @@ function App() {
     // return
     return (<div>
         {/* Form to input data */}
-        <form onSubmit={handleSubmit} class="login-form">
+        <form onSubmit={handleSubmit} className="login-form">
             <h1>Login</h1>
-            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required class="login-input" /> <br />
-            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required class="login-input" /> <br />
-            <div class="form-footer">
-                <p class="form-paragraph">Don't have an account?  </p>
-                <Link to="/register" class="register-link">Register</Link> <br />
+            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
+            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input" /> <br />
+            <div className="form-footer">
+                <p className="form-paragraph">Don't have an account?  </p>
+                <Link to="/register" className="register-link">Register</Link> <br />
             </div>
-            <button type="submit" class="login-button">Login</button>
+            <button type="submit" className="login-button">Login</button>
         </form>
     </div>);
 }

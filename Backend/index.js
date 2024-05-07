@@ -8,8 +8,9 @@ const bcrypt = require('bcryptjs');
 const mysql = require('mysql2/promise');
 
 const secretKey = process.env.JWT_SECRET_KEY;
-
 const app = express();
+
+let signedInUser = null;
 
 const PORT = 4000;
 app.use(cors());
@@ -108,22 +109,12 @@ app.post("/login", async (req, res) => {
         }
 
         const user = userExists[0];
-
-        // Create a token
-        const token = jwt.sign({ email: user.email}, secretKey, { expiresIn: "1h" });
+        signedInUser = user.email;
 
         // Return token
-        const msg = "POST:User registered successfully";
+        let msg = "POST:User registered successfully";
         console.log(msg);
-        return res.status(200).send({success: msg, token: token });
-
-        // success
-        // const msg = "POST:User signed in successfully";
-        // console.log(msg);
-        // return res.status(200).send({success:msg});
-
-        // add logic for signing in user
-
+        return res.status(200).send({success: msg, user: signedInUser});
 
     } catch (err) {
         // Handle any error
