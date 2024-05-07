@@ -149,10 +149,13 @@ const MainPage = () => {
     return(
         
     <div>
-        <nav>
-            <Link to="/">Home </Link>
-            <Link to="/register">Register </Link>
-            <Link to="/login">Login </Link>
+        <nav class="navbar navbar-dark bg-dark">
+            <div class ="container-fluid">
+                <Link to="/">Home</Link>
+                <Link to="/register">Register</Link>
+                <Link to="/login">Login</Link>
+                </div>
+            
         </nav>
         <h1>RateMyApartment</h1>
     </div>)}
