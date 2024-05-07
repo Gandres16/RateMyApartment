@@ -54,12 +54,22 @@ body, html{
   color: #888;
 }
 
-#navbar {
-  width:100%;
-  top: 0;
+.navbar{
+  position: fixed;
+  left:0;
+  width: 100%;
+  top:0;
 }
 
 .nav-link{
   margin: 0 10px;
   flex-grow: 0;
 }
+
+.navButton {
+  background: none;   /* Removes any background styles */
+  border: none;       /* Removes border */
+  padding: 5px 10px;  /* Minimal padding */
+  margin: 0 5px;      /* Spacing between buttons, adjust as necessary */
+}
+

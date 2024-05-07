@@ -8,7 +8,7 @@ import {
 import { Link } from "react-router-dom";
 
 import "./styles.css";
-import { jwtDecode } from 'jwt-decode';
+//import { jwtDecode } from 'jwt-decode';
 
 import './styles.css';
 
@@ -156,26 +156,33 @@ function App() {
   const MainPage = () => {
     const navigate = useNavigate();
 
-    return <div></div>;
+    return(
+    <div>
+        <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div className="container-fluid">
+                <a className="navbar-brand">RateMyApartment</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        <div className="collapse navbar-collapse" id="navbarColor01">
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <button className="nav-link " aria-current="page" onClick={() => navigate('/')}>Home</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/login')}>Login</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/register')}>Register</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+    </div>);
   };
 
   return (
     <Router>
       <div>
-        <nav id="navbar">
-          <button class="navButton">
-            <Link to="/">Home</Link>
-          </button>
-          <button class="navButton">
-            <Link to="/Login">Login</Link>
-          </button>
-          <button class="navButton">
-            <Link to="/Register">Register</Link>
-          </button>
-          <button class="navButton">
-            <Link to="/about">ABOUT THE TEAM</Link>
-          </button>
-        </nav>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/register" element={<Register />} />
