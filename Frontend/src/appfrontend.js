@@ -8,15 +8,23 @@ import {
 import { Link } from "react-router-dom";
 
 import "./styles.css";
+import { jwtDecode } from 'jwt-decode';
+
+import './styles.css';
+
+const secretKey = process.env.JWT_SECRET_KEY;
 
 function App() {
-  const Register = () => {
-    // define hooks
-    const navigate = useNavigate();
-    const [formData, setFormData] = useState({
-      email: "",
-      password: "",
-    });
+
+    var signedInUser = null;
+
+    const Register = () => {
+        // define hooks
+        const navigate = useNavigate();
+        const [formData, setFormData] = useState({
+            email: "",
+            password: ""
+        });
 
     // Function to add input in formData HOOK using operator ...
     const handleChange = (e) => {
@@ -32,74 +40,49 @@ function App() {
       e.preventDefault();
       console.log(e.target.value);
 
-      fetch("http://127.0.0.1:4000/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => {
-          if (response.status != 200) {
-            return response.json().then((errData) => {
-              throw new Error(
-                `POST response was not ok :\n Status:${response.status}. \n Error: ${errData.error}`
-              );
+            fetch("http://127.0.0.1:4000/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(formData),
+            })
+
+            .then(response => {
+                if (response.status != 200){
+                    return response.json()
+                    .then(errData =>{
+                        throw new Error(`POST response was not ok :\n Status:${response.status}. \n Error: ${errData.error}`);
+                    })
+                }
+                return response.json();})
+
+            .then(data => {
+                console.log(data);
+                alert("User added successfully!");
+                signedInUser = formData.email;
+                navigate("/"); // Redirect to home page after successful registration
+            })
+
+            .catch(error => {
+                console.error('Error adding User:', error);
+                alert('Error adding User:'+error.message); // Display alert if there's an error
             });
-          }
-          return response.json();
-        })
+        }
 
-        .then((data) => {
-          console.log(data);
-          alert("User added successfully!");
-          navigate("/"); // Redirect to home page after successful registration
-        })
-
-        .catch((error) => {
-          console.error("Error adding User:", error);
-          alert("Error adding User:" + error.message); // Display alert if there's an error
-        });
-    };
-
-    // return
-    return (
-      <div>
-        {/* Form to input data */}
-        <form onSubmit={handleSubmit} class="login-form">
-          <h1>Register</h1>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            required
-            class="login-input"
-          />{" "}
-          <br />
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Password"
-            required
-            class="login-input"
-          />{" "}
-          <br />
-          <div class="form-footer">
-            <p class="form-paragraph">Already have an account? </p>
-            <Link to="/login" class="register-link">
-              Login
-            </Link>{" "}
-            <br />
-          </div>
-          <button type="submit" class="login-button">
-            Register
-          </button>
-        </form>
-      </div>
-    );
-  };
+        // return
+        return (<div>
+            {/* Form to input data */}
+            <form onSubmit={handleSubmit} className="login-form">
+                <h1>Register</h1>
+                <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
+                <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input"/> <br />
+                <div className="form-footer">
+                    <p className="form-paragraph">Already have an account?  </p>
+                    <Link to="/login" className="register-link">Login</Link> <br />
+                </div>
+                <button type="submit" className="login-button">Register</button>
+            </form>
+        </div>);
+    }
 
   const Login = () => {
     // define hooks
@@ -139,10 +122,11 @@ function App() {
           return response.json();
         })
 
-        .then((data) => {
-          console.log(data);
-          alert("User logged in successfully!");
-          navigate("/"); // Redirect to home page after successful login
+        .then(data => {
+            console.log(data);
+            alert("User logged in successfully!:" + data.user);
+            signedInUser = data.user;
+            navigate("/"); // Redirect to home page after successful login
         })
 
         .catch((error) => {
@@ -155,38 +139,15 @@ function App() {
     return (
       <div>
         {/* Form to input data */}
-        <form onSubmit={handleSubmit} class="login-form">
-          <h1>Login</h1>
-          <input
-            type="text"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Email"
-            required
-            class="login-input"
-          />{" "}
-          <br />
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            placeholder="Password"
-            required
-            class="login-input"
-          />{" "}
-          <br />
-          <div class="form-footer">
-            <p class="form-paragraph">Don't have an account? </p>
-            <Link to="/register" class="register-link">
-              Register
-            </Link>{" "}
-            <br />
-          </div>
-          <button type="submit" class="login-button">
-            Login
-          </button>
+        <form onSubmit={handleSubmit} className="login-form">
+            <h1>Login</h1>
+            <input type="text" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required className="login-input" /> <br />
+            <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required className="login-input" /> <br />
+            <div className="form-footer">
+                <p className="form-paragraph">Don't have an account?  </p>
+                <Link to="/register" className="register-link">Register</Link> <br />
+            </div>
+            <button type="submit" className="login-button">Login</button>
         </form>
       </div>
     );
