@@ -239,13 +239,40 @@ function App() {
             <div className="searchResults">
             {oneProduct.map((el) => (
                 <div key={el.id}>
-                <div>Title: {el.title}</div>
+                  <button className ="searchAptBtn"onClick={() => navigate(`/apartment/${el.id}`)}>{el.name}</button>
                 </div>
                 ))}
             </div>
         </div>
     </div>);
   };
+
+  const Apartment = () => {
+    const navigate = useNavigate();
+    return(
+    <div>
+        <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div className="container-fluid">
+                <a className="navbar-brand">RateMyApartment</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        <div className="collapse navbar-collapse" id="navbarColor01">
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <button className="nav-link " aria-current="page" onClick={() => navigate('/')}>Home</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/login')}>Login</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/register')}>Register</button>
+                                </li>
+                            </ul>
+                        </div>
+            </div>
+        </nav>
+
+    </div>)
+  }
 
   return (
     <Router>
@@ -254,6 +281,7 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/apartment/:id" element={<Apartment />} />
         </Routes>
       </div>
     </Router>

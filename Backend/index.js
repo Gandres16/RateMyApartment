@@ -124,6 +124,21 @@ app.post("/login", async (req, res) => {
     }
 });
 
+// app.get("/catalog/:id", async (req, res) => {
+//     try {
+//     // Read id from frontend
+//     const id = req.params.id;
+//     const query = "SELECT * FROM fakestore_catalog WHERE id = ?";
+//     const [result] = await db.query(query, [id]); // Ensure to use array for parameters even if it's just one
+//     console.log("Success in Reading MySQL");
+//     res.status(200).send(result);
+//     } catch (err) {
+//     // If an error occurs, catch it and send an appropriate error response
+//     console.error("Error in Reading MySQL :", err);
+//     res.status(500).send({ error: 'An error occurred while fetching items.' });
+//     }
+//     });
+
 app.get("/apartment/:name", async (req, res) => {
     try{
         const name = req.params.name;
