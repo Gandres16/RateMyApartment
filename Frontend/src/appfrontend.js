@@ -6,11 +6,11 @@ import {
   useNavigate,
 } from "react-router-dom";
 import { Link } from "react-router-dom";
-
 import "./styles.css";
 //import { jwtDecode } from 'jwt-decode';
 
 import './styles.css';
+//import { text } from "body-parser";
 
 const secretKey = process.env.JWT_SECRET_KEY;
 
@@ -191,13 +191,22 @@ function App() {
     );
   };
 
+
   const MainPage = () => {
     const navigate = useNavigate();
-    const [input, setInput] = useState("");
+    const [oneProduct, setOneProduct] = useState([]);
+    const [id, setId] = useState("");
 
-    const fetchdata = (value) => {
-
-    };
+    useEffect(() => {
+        if (id) {
+        fetch(`http://127.0.0.1:4000/apartment/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+        console.log("Show one apartment :", data);
+        setOneProduct(data);
+        });
+        }
+        }, [id]);
 
 
     return(
@@ -219,8 +228,22 @@ function App() {
                                 </li>
                             </ul>
                         </div>
-                    </div>
-                </nav>
+            </div>
+        </nav>
+        <div className="search">
+            <div className="searchInput">
+                <input type="text" placeholder="Enter apartment" onChange={(e) => setId(e.target.value)} />
+                <div className="searchIcon"> 
+                </div>
+            </div>
+            <div className="searchResults">
+            {oneProduct.map((el) => (
+                <div key={el.id}>
+                <div>Title: {el.title}</div>
+                </div>
+                ))}
+            </div>
+        </div>
     </div>);
   };
 
