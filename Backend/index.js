@@ -123,3 +123,16 @@ app.post("/login", async (req, res) => {
         res.status(500).send({error:msg});
     }
 });
+
+app.get("/apartment/:name", async (req, res) => {
+    try{
+        const name = req.params.name;
+        const query = "SELECT * FROM apartments WHERE name LIKE ?";
+        const [result] = await db.query(query, [`%${name}%`]);
+        console.log("Success in Reading MySQL");
+        res.status(200).send(result);
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({error: "An error occurred"});
+    }
+});
