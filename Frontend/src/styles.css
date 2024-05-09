@@ -1,10 +1,11 @@
-body, html{
+body{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     background-color: #f3f3f3;
     padding-bottom: 20px;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
   }
   
 .login-form {
@@ -73,3 +74,15 @@ body, html{
   margin: 0 5px;      /* Spacing between buttons, adjust as necessary */
 }
 
+.searchInput input {
+  width: 500px;
+  height: 40px;
+}
+
+.searchResults {
+  width: 100%;
+}
+
+.searchAptBtn{
+  width: 100%;
+}
