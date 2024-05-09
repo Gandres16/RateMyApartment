@@ -253,7 +253,7 @@ function App() {
             <div className="searchResults">
             {oneProduct.map((el) => (
                 <div key={el.id}>
-                  <button className ="searchAptBtn"onClick={() => navigate(`/apartment/${el.id}`)}>{el.name}</button>
+                  <button className ="searchAptBtn"onClick={() => navigate(`/apartment/${el.id}`)}>{el.apt_name}</button>
                 </div>
                 ))}
             </div>
