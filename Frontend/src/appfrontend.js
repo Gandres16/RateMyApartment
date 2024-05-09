@@ -453,12 +453,12 @@ function App() {
     <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
         <div className="col d-flex flex-column align-items-start gap-2">
             <h2 className="fw-bold text-body-emphasis">Here is a little description about the class and us.</h2>
-            <p className="text-body-secondary"> This website is here to give students a place to find reliable reviews about apartments</p>
+            <p className="text-body-secondary">This is for SE/ComS319 Construction of User Interfaces, Spring 2024.</p>
         </div>
         <div className="col">
             <div className="row row-cols-1 row-cols-sm-2 g-4">
                 <div className="col d-flex flex-column gap-2">
-                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center  bg-gradient fs-4 rounded-3">
                         <img className="bi" src={bird} width="40px" height="40px"/>
                     </div>
                     <h4 className="fw-semibold mb-0 text-body-emphasis">Andres Gonzalez</h4>
@@ -467,7 +467,7 @@ function App() {
                     </ul>
                 </div>
                 <div className="col d-flex flex-column gap-2">
-                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center bg-gradient-right fs-4 rounded-3">
                         <img className="bi" src={elephant} width="40px" height="40px"/>
                     </div>
                     <h4 className="fw-semibold mb-0 text-body-emphasis">Jacob Frencher</h4>
@@ -476,7 +476,7 @@ function App() {
                     </ul>
                 </div>
                 <div className="col d-flex flex-column gap-2">
-                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-4 rounded-3">
+                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center  bg-gradient-right fs-4 rounded-3">
                         <img className="bi" src={teacher} width="40px" height="40px"/>
                     </div>
                     <h4 className="fw-semibold mb-0 text-body-emphasis">Professors</h4>
