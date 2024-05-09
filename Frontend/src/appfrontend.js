@@ -9,6 +9,9 @@ import { Link } from "react-router-dom";
 import "./styles.css";
 
 import './styles.css';
+import bird from './Images/bird.png';
+import elephant from './Images/elephant.png';
+import teacher from './Images/teacher.png';
 
 const secretKey = process.env.JWT_SECRET_KEY;
 
@@ -83,6 +86,9 @@ function App() {
                                 </li>
                                 <li className="nav-item">
                                     <button className="nav-link" onClick={() => navigate('/register')}>Register</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/aboutUs')}>About Us</button>
                                 </li>
                             </ul>
                         </div>
@@ -171,6 +177,9 @@ function App() {
                                 <li className="nav-item">
                                     <button className="nav-link" onClick={() => navigate('/register')}>Register</button>
                                 </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/aboutUs')}>About Us</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -228,6 +237,9 @@ function App() {
                                 <li className="nav-item">
                                   <button className="nav-link" onClick={() => navigate('/reviews')}>Reviews</button>
                               </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/aboutUs')}>About Us</button>
+                                </li>
                             </ul>
                         </div>
             </div>
@@ -322,6 +334,9 @@ function App() {
                                 <li className="nav-item">
                                     <button className="nav-link" onClick={() => navigate('/register')}>Register</button>
                                 </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/aboutUs')}>About Us</button>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -401,6 +416,9 @@ function App() {
                                 </li>
                                 <li className="nav-item">
                                     <button className="nav-link" onClick={() => navigate('/register')}>Register</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/aboutUs')}>About Us</button>
                                 </li>
                             </ul>
                         </div>
@@ -630,6 +648,80 @@ const UpdateReview = () => {
   )
 };
 
+  const Aboutus = () => {
+    const navigate = useNavigate();
+    return(
+    <div>
+        <nav className="navbar navbar-expand-lg bg-dark border-bottom border-body" data-bs-theme="dark">
+            <div className="container-fluid">
+                <a className="navbar-brand">RateMyApartment</a>
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation"></button>
+                        <div className="collapse navbar-collapse" id="navbarColor01">
+                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li className="nav-item">
+                                    <button className="nav-link " aria-current="page" onClick={() => navigate('/')}>Home</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/login')}>Login</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/register')}>Register</button>
+                                </li>
+                                <li className="nav-item">
+                                    <button className="nav-link" onClick={() => navigate('/aboutUs')}>About Us</button>
+                                </li>
+                            </ul>
+                        </div>
+            </div>
+        </nav>
+        <div className="container px-4 py-5">
+    <h2 className="pb-2 ">About us</h2>
+    <div className="row row-cols-1 row-cols-md-2 align-items-md-center g-5 py-5">
+        <div className="col d-flex flex-column align-items-start gap-2">
+            <h2 className="fw-bold text-body-emphasis">Here is a little description about the class and us.</h2>
+            <p className="text-body-secondary">This is for SE/ComS319 Construction of User Interfaces, Spring 2024.</p>
+        </div>
+        <div className="col">
+            <div className="row row-cols-1 row-cols-sm-2 g-4">
+                <div className="col d-flex flex-column gap-2">
+                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center  bg-gradient fs-4 rounded-3">
+                        <img className="bi" src={bird} width="40px" height="40px"/>
+                    </div>
+                    <h4 className="fw-semibold mb-0 text-body-emphasis">Andres Gonzalez</h4>
+                    <ul className="text-body-secondary">
+                        <li className="email">Email: andresg2@iastate.edu</li>
+                    </ul>
+                </div>
+                <div className="col d-flex flex-column gap-2">
+                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center bg-gradient-right fs-4 rounded-3">
+                        <img className="bi" src={elephant} width="40px" height="40px"/>
+                    </div>
+                    <h4 className="fw-semibold mb-0 text-body-emphasis">Jacob Frencher</h4>
+                    <ul className="text-body-secondary">
+                        <li className="email">Email: jacoblf@iastate.edu</li>
+                    </ul>
+                </div>
+                <div className="col d-flex flex-column gap-2">
+                    <div className="feature-icon-small d-inline-flex align-items-center justify-content-center  bg-gradient-right fs-4 rounded-3">
+                        <img className="bi" src={teacher} width="40px" height="40px"/>
+                    </div>
+                    <h4 className="fw-semibold mb-0 text-body-emphasis">Professors</h4>
+                    <ul className="text-body-secondary">
+                        <li>Abraham Aldaco, Ph.D.</li>
+                        <li className="email">Email: aaldaco@iastate.edu</li>
+                        <li>Ali Jannesari, Ph.D</li>
+                        <li className="email">Email: jannesar@iastate.edu</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>)
+
+  }
+
   return (
     <Router>
       <div>
@@ -641,6 +733,7 @@ const UpdateReview = () => {
           <Route path="/apartment/:id" element={<Apartment />} />
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/addapartment/:id" element={<UpdateReview />} />
+          <Route path="/aboutUs" element={<Aboutus />} />
         </Routes>
       </div>
     </Router>
