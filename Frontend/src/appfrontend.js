@@ -242,6 +242,9 @@ function App() {
                 ))}
             </div>
         </div>
+        <div className="addReview">
+            <button className="addReviewBtn" type="button" onClick={() => navigate('/addapartment')}>Add a Review</button>
+        </div>
     </div>);
   };
 
@@ -398,7 +401,6 @@ function App() {
                         </div>
             </div>
         </nav>
-
     </div>)
   }
 
