@@ -136,3 +136,47 @@ app.get("/apartment/:name", async (req, res) => {
         res.status(500).send({error: "An error occurred"});
     }
 });
+
+app.post("/addapartment", async (req, res) => {
+    try {
+        // Validate if body contains data
+        if (!req.body || Object.keys(req.body).length === 0) {
+            const msg = "POST:Bad request: No data provided.";
+            console.log(msg);
+            return res.status(400).send({ error: msg});
+        }
+
+        // Check if the table exists
+        const [tableExists] = await db.query("SHOW TABLES LIKE 'reviews'");
+        if (tableExists.length === 0) {
+            const msg = "POST:reviews table does not exist";
+            console.log(msg);
+            return res.status(404).send({error:msg});
+        }
+
+        const { aptName, facilities, happiness, safety, internet, location, management } = req.body;
+        const email = signedInUser;
+
+        // Check if all fields have a value
+        if (!email || !aptName || !facilities || !happiness || !safety || !internet || !location || !management) {
+            const msg = "POST: All fields must have a value";
+            console.log(msg);
+            return res.status(400).send({error:msg});
+        }
+
+        // Proceed to add new user
+        const insertSql = "INSERT INTO reviews (user_email, apt_name, facilities, happiness, safety, internet, location, management) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        const insertResult = await db.query(insertSql, [email, aptName, facilities, happiness, safety, internet, location, management])
+
+        // success
+        const msg = "POST:Success in Posting MySQL"+insertResult;
+        console.log(msg);
+        return res.status(200).send({success:msg});
+
+    } catch (err) {
+        // Handle any error
+        const msg = "POST: An ERROR occurred in Post"+err;
+        console.error(msg);
+        res.status(500).send({error:msg});
+    }
+});
