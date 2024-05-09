@@ -195,3 +195,60 @@ app.post("/addapartment", async (req, res) => {
         res.status(500).send({error:msg});
     }
 });
+
+app.get("/reviews", async (req, res) => {
+    try {
+    const query = "SELECT * FROM reviews WHERE user_email = ?";
+    const [result] = await db.query(query, [signedInUser]); // Ensure to use array for parameters even if it's just one
+    res.status(200).send(result); // Send the results as the response
+    } catch (err) {
+    console.error("Error in Reading MySQL :", err);
+    res.status(500).send({ error: 'An error occurred while fetching items.' });
+    }
+});
+
+app.put("/addapartment/:id", async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        // Validate if body contains data
+        if (!req.body || Object.keys(req.body).length === 0) {
+            const msg = "POST:Bad request: No data provided.";
+            console.log(msg);
+            return res.status(400).send({ error: msg});
+        }
+
+        // Check if the table exists
+        const [tableExists] = await db.query("SHOW TABLES LIKE 'reviews'");
+        if (tableExists.length === 0) {
+            const msg = "POST:reviews table does not exist";
+            console.log(msg);
+            return res.status(404).send({error:msg});
+        }
+
+        const { aptName, facilities, happiness, safety, internet, location, management } = req.body;
+        const email = signedInUser;
+
+        // Check if all fields have a value
+        if (!email || !aptName || !facilities || !happiness || !safety || !internet || !location || !management) {
+            const msg = "POST: All fields must have a value";
+            console.log(msg);
+            return res.status(400).send({error:msg});
+        }
+
+        // Proceed to update review
+        const updateSql = "UPDATE reviews SET user_email = ?, apt_name = ?, facilities = ?, happiness = ?, safety = ?, internet = ?, location = ?, management = ? WHERE id = ?";
+        const updateResult = await db.query(updateSql, [email, aptName, facilities, happiness, safety, internet, location, management, id]);
+
+        // success
+        const msg = "POST:Success in Posting MySQL"+updateResult;
+        console.log(msg);
+        return res.status(200).send({success:msg});
+
+    } catch (err) {
+        // Handle any error
+        const msg = "POST: An ERROR occurred in PUT"+err;
+        console.error(msg);
+        res.status(500).send({error:msg});
+    }
+});
