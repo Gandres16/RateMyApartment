@@ -142,7 +142,7 @@ app.post("/login", async (req, res) => {
 app.get("/apartment/:name", async (req, res) => {
     try{
         const name = req.params.name;
-        const query = "SELECT * FROM apartments WHERE name LIKE ?";
+        const query = "SELECT * FROM reviews WHERE apt_name LIKE ?";
         const [result] = await db.query(query, [`%${name}%`]);
         console.log("Success in Reading MySQL");
         res.status(200).send(result);
