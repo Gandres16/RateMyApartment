@@ -32,7 +32,7 @@ body{
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  background-color: purple;
+  background-color: #dfbb67;
   color: white;
   cursor: pointer;
 }
@@ -46,7 +46,7 @@ body{
 .register-link {
   margin-left: 10px;
   margin-bottom: 15px;
-  color: purple;
+  color: #dfbb67;
   text-decoration: none;
 }
 
