@@ -179,7 +179,7 @@ app.post("/addapartment", async (req, res) => {
             return res.status(400).send({error:msg});
         }
 
-        // Proceed to add new user
+        // Proceed to add review
         const insertSql = "INSERT INTO reviews (user_email, apt_name, facilities, happiness, safety, internet, location, management) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         const insertResult = await db.query(insertSql, [email, aptName, facilities, happiness, safety, internet, location, management])
 
